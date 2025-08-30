@@ -5,7 +5,7 @@ Flask==2.3.2
 gunicorn==21.2.0
 
 # For handling cross-origin requests from your React frontend
-flask-cors==3.1.0
+flask-cors==3.0.10
 
 # Optional: add other dependencies your app needs below
 # Example:
