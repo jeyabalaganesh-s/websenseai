@@ -1,16 +1,18 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import mysql.connector
+import os
 
 app = Flask(__name__)
 CORS(app)  # Allow cross-origin requests
 
-# Database connection
+# Database connection using environment variables
 db = mysql.connector.connect(
-    host="localhost",
-    user="jeya",
-    password="Jeya@123",
-    database="websenceai"
+    host=os.getenv("DB_HOST"),
+    port=int(os.getenv("DB_PORT", 3306)),
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASS"),
+    database=os.getenv("DB_NAME")
 )
 cursor = db.cursor(dictionary=True)
 
@@ -25,9 +27,14 @@ def get_users():
 @app.route('/add_user', methods=['POST'])
 def add_user():
     data = request.json
-    cursor.execute("INSERT INTO users (name, email) VALUES (%s, %s)", (data['name'], data['email']))
+    cursor.execute(
+        "INSERT INTO users (name, email) VALUES (%s, %s)", 
+        (data['name'], data['email'])
+    )
     db.commit()
     return jsonify({"message": "User added!"})
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # Render sets PORT environment variable
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
