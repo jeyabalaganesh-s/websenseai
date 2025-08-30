@@ -1,6 +1,4 @@
 Flask==2.3.2
 gunicorn==21.2.0
 flask-cors==3.0.10
-
-# MySQL client for Python
 mysql-connector-python==8.1.0
