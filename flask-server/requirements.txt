@@ -1,14 +1,6 @@
-# Flask web framework
 Flask==2.3.2
-
-# WSGI server for deployment
 gunicorn==21.2.0
-
-# For handling cross-origin requests from your React frontend
 flask-cors==3.0.10
 
-# Optional: add other dependencies your app needs below
-# Example:
-# requests==2.31.0
-# psycopg2-binary==2.9.7   # if using PostgreSQL
-# SQLAlchemy==2.0.22        # if using SQLAlchemy ORM
+# MySQL client for Python
+mysql-connector-python==8.1.0
